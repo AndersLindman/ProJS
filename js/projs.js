@@ -91,3 +91,9 @@ Component.updateView = function(type, event) {
         }
     }
 };
+
+// Event hub.
+Hub = o(Component);
+Hub.send = function(type, event) {
+ this.updateView(type, event);
+};
