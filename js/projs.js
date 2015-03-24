@@ -94,6 +94,11 @@ Component.updateView = function(type, event) {
 
 // Event hub.
 Hub = o(Component);
-Hub.send = function(type, event) {
- this.updateView(type, event);
+Hub.send = function(type, event, milliseconds) {
+	var hub = this;
+	if (typeof milliseconds == 'number') {
+		setTimeout(function() {hub.updateView(type, event);}, milliseconds);
+	} else {
+		this.updateView(type, event);
+	}
 };
