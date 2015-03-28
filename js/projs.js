@@ -119,6 +119,7 @@ Assert.ERROR_NOT_ASSERTED_OBJECT =
 Assert.ERROR_INVALID_ASSERTION_TYPE =
 		'Third value (assertion type) in argument must be a string ' +
 		'of either \'sends\', \'receives\' or \'io\'. ';
+Assert.ERROR_ALREADY_REGISTERED = 'Duplicated registration. ';
 Assert.isValidAssertionType = function(type) {
 	return type == 'sends' || type == 'receives' || type == 'io';
 };
