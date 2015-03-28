@@ -243,9 +243,6 @@ Asserted.isRegistered = function(eventType, assertionType) {
 Asserted.send = function(type, event, milliseconds) {
 	this.isAsserted();
 	this.isRegistered(type, 'sends');
-	if (typeof event == 'number') {
-		milliseconds = event;
-	}
 	if (typeof milliseconds == 'number') {
 		setTimeout(function() {
 			Asserted.updateView(type, event);
