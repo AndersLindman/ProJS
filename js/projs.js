@@ -305,11 +305,27 @@ Server.ajax = function(type, event) {
 					asserted.send(response.type, response.value);
 				}
 			} else {				
-				asserted.send(errorType, {status:xmlhttp.status, text:xmlhttp.responseText})
+				asserted.send(errorType, {status:xmlhttp.status, text:xmlhttp.responseText});
 			}
 		}
 	};
 	xmlhttp.open('POST', asserted.uri, true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 	xmlhttp.send('type=' + type + '&value=' + JSON.stringify(event));
+};
+
+// App container.
+App = o(Asserted);
+App.constructor = function() {
+	this.objects = [];
+	if (!this.element) {
+		this.element = c('div', document.body, 'app');
+	}
+};
+App.add = function(object) {
+	if (object.element || object.nodeType) {
+		this.objects.push(c(object, this.element));
+	} else {
+		this.objects.push(object);
+	}
 };
