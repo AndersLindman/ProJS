@@ -285,3 +285,30 @@ Asserted.updateView = function(type, event) {
 	this.isAssertedPrototype('updateView()');
 	Component.updateView.call(this, type, event);
 };
+
+// Event server.
+Server = o(Asserted);
+Server.ajax = function(type, event) {
+	if (!this.uri) {
+		throw 'Server URI for AJAX calls missing.';
+	}
+	var asserted = this;
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+		var errorType = type + '-error';
+		if (xmlhttp.readyState == 4) {
+			if (xmlhttp.status == 200) {
+				var response = JSON.parse(xmlhttp.responseText);
+				if (response.error) {
+					asserted.send(errorType, {status:xmlhttp.status, text:response.error});
+				} else {
+					asserted.send(response.type, response.value);
+				}
+			} else {				
+				asserted.send(errorType, {status:xmlhttp.status, text:xmlhttp.responseText})
+			}
+		}
+	};
+	xmlhttp.open('POST', asserted.uri, true);
+	xmlhttp.send('type=' + type + '&value=' + JSON.stringify(event));
+};
