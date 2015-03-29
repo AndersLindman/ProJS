@@ -310,5 +310,6 @@ Server.ajax = function(type, event) {
 		}
 	};
 	xmlhttp.open('POST', asserted.uri, true);
+	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 	xmlhttp.send('type=' + type + '&value=' + JSON.stringify(event));
 };
