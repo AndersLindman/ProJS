@@ -139,9 +139,8 @@ Assert.register = function() {
 		if (/[A-Z]/.test(argument[0])) {
 			throw Assert.ERROR_UPPER_CASE_EVENT_TYPE_NAME +
 					'Invalid event type name: ' + argument[0];
-		}
-		
-		if (!(/^[a-z](-?([a-z0-9]+))*$/.test(argument[0]))) {
+		}	
+		if (!(/^[a-z](-?[a-z0-9]+)*$/.test(argument[0]))) {
 			throw Assert.ERROR_INVALID_EVENT_TYPE_NAME +
 					'Invalid event type name: ' + argument[0];
 		}
