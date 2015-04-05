@@ -313,6 +313,12 @@ Server.ajax = function(type, event) {
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 	xmlhttp.send('type=' + type + '&value=' + JSON.stringify(event));
 };
+Server.connect = function(type) {
+	var asserted = this;
+	this.receive(type, function(event) {
+		asserted.ajax(type, event);		
+	});
+};
 
 // App container.
 App = o(Asserted);
